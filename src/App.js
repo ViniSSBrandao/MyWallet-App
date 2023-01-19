@@ -2,6 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 import Login from './Components/Routes/Login';
 import SignUp from './Components/Routes/SignUp'
+import Home from './Components/Routes/Home/Home';
+import Novaentrada from './Components/Routes/NewEntry/Novaentrada';
+import NovaSaida from './Components/Routes/NewExit/NovaSaida';
 
 function App() {
   return (
@@ -23,7 +26,10 @@ function App() {
     // </div>
     <div>
       {/* <Login/> */}
-      <SignUp/>
+      {/* <SignUp/> */}
+      {/* <Novaentrada/> */}
+      <Home/>
+      {/* <NovaSaida/> */}
     </div>
   );
 }
