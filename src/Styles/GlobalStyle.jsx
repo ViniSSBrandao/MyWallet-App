@@ -22,7 +22,8 @@ h3{
     font-weight: 400;
     font-size:14px;
     margin-left:5% ;
-    color: white;
+    color: #868686;
+
     line-height: 5px;
 }
 `
