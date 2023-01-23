@@ -26,6 +26,8 @@ export default function() {
       
       }
 
+      const entries = axios.get(`${URL}home`)
+      console.log(entries)
   
     return (
       <Container>

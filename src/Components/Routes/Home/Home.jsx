@@ -2,21 +2,43 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import GlobalStyle from "../../../Styles/GlobalStyle";
+import URL from "../../ApiUrl/Url";
 
 export default function (){
 
     const navigate = useNavigate()
 
+    const [entries, setEntries] = useState()
+    
+    console.log(entries)
+
+    useEffect( ()=>{
+        const config = {
+            headers: {
+                Authorization: `23e644c3-5400-4d30-b48c-7bf05d2a61a1`
+            }
+        }
+        console.log(URL)
+        const promise = axios.get(`${URL}home`, config)
+        promise.then((res) => {setEntries(res.data), console.log(res.data)})
+        promise.catch(console.log)
+        
+    } ,[]
+    )
+    
+    console.log(entries)
+
+    if(entries){
     return(
         <>
         <GlobalStyle/>
         <Container>
         <h2>Olá, fulaninho</h2>
         <RegisteredEntries>
-            {/* <NoEntry><h3>Não há entradas ou saidas</h3></NoEntry> */}
-            <Entrie><p style={{color:"#C6C6C6"}}>30/02</p><p>asdasdasdasdsa</p><p style={{color:"#03AC00"}}>20,55</p></Entrie>
+           
+            {entries.map((n)=> <Entrie><p style={{color:"#C6C6C6"}}>{n.date}</p><p>{n.description}</p><p style={{color:"#03AC00"}}>{n.value}</p></Entrie>)}
             <Saldo>
                 <h4>
                     <div>saldo</div>
@@ -38,7 +60,35 @@ export default function (){
 
         </>
     )
+    }
+    else{
+        return(
+            <>
+            <GlobalStyle/>
+            <Container>
+            <h2>Olá, fulaninho</h2>
+            <RegisteredEntries>
+               
+            <NoEntry><h3>Não há entradas ou saidas</h3></NoEntry> 
+              
+            </RegisteredEntries>
+            <EntrieOptions>
+                <div>
+                    <button onClick={() => navigate("/nova-entrada")}> <img src="./Plus.svg"/> <h2>Nova entrada</h2></button>
+                </div>
+                <div>
+                    <button onClick={() => navigate("/nova-saida")}><img src="./Minus.svg"/> <h2>Nova saida</h2></button>
+                </div>
+            </EntrieOptions>
+            </Container>
+    
+            </>
+        )
+
+    }
+    
 }
+
 
 const Container = styled.div`
 width: 86%;
