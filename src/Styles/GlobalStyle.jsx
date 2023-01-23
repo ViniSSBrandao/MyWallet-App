@@ -3,8 +3,9 @@ import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
 
 body{
-    font-family: roboto;
+    font-family: Raleway;
     background-color:#8C11BE;
+    
 }
 h1{
         font-weight: 400;

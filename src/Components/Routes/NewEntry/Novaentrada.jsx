@@ -7,8 +7,14 @@ import GlobalStyle from "../../../Styles/GlobalStyle";
 
 
 export default function() {
+    const navigate = useNavigate();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+      
+      navigate('/home')
+      console.log(data)
+      
+    };
   
     console.log(watch("example")); // watch input value by passing the name of it
   
@@ -17,15 +23,14 @@ export default function() {
       <GlobalStyle />
       <h2>Nova entrada</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-         <div><input placeholder="valor" id='valor' name="Valor" type="number" {...register("email", {required:true})} /></div>
+         <div><input placeholder="valor" id='valor' name="Valor" type="number" {...register("value", {required:true})} /></div>
         {errors.email && <div><h3>coloque o valor</h3></div>}
         
-        <div><input id='entrada' name="entrada" placeholder="Descrição" type="text" {...register("password", { required: true })} /></div>
+        <div><input id='entrada' name="entrada" placeholder="Descrição" type="text" {...register("description", { required: true })} /></div>
         {errors.password && <div><h3>insira uma descrição</h3></div>}
 
     <SubmitBtn> <input value="Salvar entrada" style={{background:'#ff4791', color:'white'}} type="submit" /></SubmitBtn>
       </form>
-        {/* <Link to="/cadastro"><LoginHook>Primeira vez? Cadastre-se!</LoginHook></Link> */}
       </Container>
     );
   }
@@ -68,10 +73,4 @@ const SubmitBtn = styled.div`
     input{
         border: none;
     }
-`
-const LoginHook = styled.div`
-    margin-top: 25px;
-    color:white;
-    font-size: 14px;
-    text-decoration: underline;
 `

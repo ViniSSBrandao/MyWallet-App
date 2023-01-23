@@ -5,12 +5,15 @@ import axios from "axios";
 import { useContext } from "react";
 import GlobalStyle from "../../Styles/GlobalStyle";
 
-
 export default function() {
+    const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-  
-    console.log(watch("example")); // watch input value by passing the name of it
+    const onSubmit = data => {
+      
+      navigate('/home')
+      console.log(data)
+    }
+
   
     return (
       <Container>
@@ -25,7 +28,7 @@ export default function() {
 
     <SubmitBtn> <input value="Entrar" style={{background:'#ff4791', color:'white'}} type="submit" /></SubmitBtn>
       </form>
-        {/* <Link to="/cadastro"><LoginHook>Primeira vez? Cadastre-se!</LoginHook></Link> */}
+        <Link to="/cadastro" style={{textDecoration: 'none'}}><LoginHook>Primeira vez? Cadastre-se!</LoginHook></Link>
       </Container>
     );
   }
@@ -73,5 +76,5 @@ const LoginHook = styled.div`
     margin-top: 25px;
     color:white;
     font-size: 14px;
-    text-decoration: underline;
+    text-decoration: none;
 `
