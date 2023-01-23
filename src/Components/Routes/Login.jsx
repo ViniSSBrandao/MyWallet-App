@@ -4,15 +4,27 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import GlobalStyle from "../../Styles/GlobalStyle";
+import URL from "../ApiUrl/Url";
 
 export default function() {
     const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-      
-      navigate('/home')
+
+    function onSubmit(data){ 
       console.log(data)
-    }
+      
+      const submitData = axios.post(`${URL}sign-in`, data)
+      submitData.then((res) =>{
+              console.log(res.data)
+              // setToken(res.data.token)
+              navigate("/home")
+              })
+      
+      submitData.catch((err) => {
+          alert(err.response.data.message)
+      })
+      
+      }
 
   
     return (
