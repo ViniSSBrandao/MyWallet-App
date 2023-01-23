@@ -5,8 +5,10 @@ import axios from "axios";
 import { useContext } from "react";
 import GlobalStyle from "../../../Styles/GlobalStyle";
 import URL from "../../ApiUrl/Url";
+import AuthContext from "../../Contexts/Authcontext";
 
 export default function() {
+    const {token} = useContext(AuthContext)
     const navigate = useNavigate();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -14,7 +16,7 @@ export default function() {
       data.exit = true
       const config = {
         headers: {
-          Authorization: `cc46f6e4-e32f-45c6-9f00-a476d6432eb7`
+          Authorization: token
         }
       }
       console.log(data)

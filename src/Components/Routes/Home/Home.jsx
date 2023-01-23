@@ -5,9 +5,11 @@ import axios from "axios";
 import { useContext, useState, useEffect } from "react";
 import GlobalStyle from "../../../Styles/GlobalStyle";
 import URL from "../../ApiUrl/Url";
+import AuthContext from "../../Contexts/Authcontext";
+
 
 export default function (){
-
+    const {token} = useContext(AuthContext)
     const navigate = useNavigate()
 
     const [entries, setEntries] = useState()
@@ -18,7 +20,7 @@ export default function (){
     useEffect( ()=>{
         const config = {
             headers: {
-                Authorization: `cc46f6e4-e32f-45c6-9f00-a476d6432eb7`
+                Authorization: token
             }
         }
         console.log(URL)
@@ -29,7 +31,7 @@ export default function (){
     } ,[]
     )
     
-    
+    let color
     
     console.log(valuesArray)    
 
@@ -42,7 +44,7 @@ export default function (){
         <h2>Olá, fulaninho</h2>
         <RegisteredEntries>
            <EntrieContainer>
-            {entries.map((n)=> <Entrie><p style={{color:"#C6C6C6"}}>{n.date}</p><p>{n.description}</p><p style={{color:"#03AC00"}}>{n.value > 0 ? n.value.toFixed(2) : -(n.value.toFixed(2))}</p></Entrie>)}
+            {entries.map((n)=> <Entrie><p style={{color:"#C6C6C6"}}>{n.date}</p><p>{n.description}</p>   {n.value > 0 ? <p style={{color:"#03AC00"}}>{n.value.toFixed(2)}</p> : <p style={{color:"#C70000"}}>{-(n.value.toFixed(2))}</p>}</Entrie>)}
             </EntrieContainer>
             <Saldo>
                 <h4>

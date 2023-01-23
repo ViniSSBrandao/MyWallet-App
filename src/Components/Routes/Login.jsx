@@ -5,18 +5,22 @@ import axios from "axios";
 import { useContext } from "react";
 import GlobalStyle from "../../Styles/GlobalStyle";
 import URL from "../ApiUrl/Url";
+import AuthContext from "../Contexts/Authcontext";
 
 export default function() {
     const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const {setToken} = useContext(AuthContext)
+    console.log(AuthContext)
 
+    console.log(setToken)
     function onSubmit(data){ 
       console.log(data)
       
       const submitData = axios.post(`${URL}sign-in`, data)
       submitData.then((res) =>{
               console.log(res.data)
-              // setToken(res.data.token)
+              setToken(res.data)
               navigate("/home")
               })
       
@@ -26,9 +30,8 @@ export default function() {
       
       }
 
-      const entries = axios.get(`${URL}home`)
-      console.log(entries)
-  
+
+
     return (
       <Container>
       <GlobalStyle />
