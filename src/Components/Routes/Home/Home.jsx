@@ -11,6 +11,8 @@ import AuthContext from "../../Contexts/Authcontext";
 export default function (){
     const {token} = useContext(AuthContext)
     const navigate = useNavigate()
+    const {id} = token
+    console.log(token, id)
 
     const [entries, setEntries] = useState()
     let [valuesArray, setValuesArray] = useState(0)
@@ -20,7 +22,8 @@ export default function (){
     useEffect( ()=>{
         const config = {
             headers: {
-                Authorization: token
+                Authorization: token.token,
+                id: id
             }
         }
         console.log(URL)
@@ -41,7 +44,7 @@ export default function (){
         <>
         <GlobalStyle/>
         <Container>
-        <h2>Olá, fulaninho</h2>
+        <h2>Olá, {token.name}</h2>
         <RegisteredEntries>
            <EntrieContainer>
             {entries.map((n)=> <Entrie><p style={{color:"#C6C6C6"}}>{n.date}</p><p>{n.description}</p>   {n.value > 0 ? <p style={{color:"#03AC00"}}>{n.value.toFixed(2)}</p> : <p style={{color:"#C70000"}}>{-(n.value.toFixed(2))}</p>}</Entrie>)}

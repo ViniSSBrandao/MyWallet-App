@@ -16,7 +16,7 @@ export default function() {
       data.exit = false
       const config = {
         headers: {
-          Authorization: token
+          Authorization: token.token
         }
       }
       console.log(data)

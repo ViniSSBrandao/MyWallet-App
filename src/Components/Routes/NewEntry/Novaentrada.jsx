@@ -9,6 +9,7 @@ import AuthContext from "../../Contexts/Authcontext";
 
 export default function() {
     const {token} = useContext(AuthContext)
+    console.log(token)
     const navigate = useNavigate();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
@@ -16,7 +17,7 @@ export default function() {
       data.exit = true
       const config = {
         headers: {
-          Authorization: token
+          Authorization: token.token
         }
       }
       console.log(data)
