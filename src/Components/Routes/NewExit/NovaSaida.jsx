@@ -9,6 +9,7 @@ import AuthContext from "../../Contexts/Authcontext";
 
 export default function() {
     const {token} = useContext(AuthContext)
+    const id = token.id
     const navigate = useNavigate()
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
@@ -20,6 +21,7 @@ export default function() {
         }
       }
       console.log(data)
+      data.id = id
       const submitData = axios.post(`${URL}novasaida`, data, config)
       submitData.then((res) =>{
               console.log(res.data)
