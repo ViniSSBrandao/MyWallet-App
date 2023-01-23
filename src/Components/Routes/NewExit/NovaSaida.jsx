@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext } from "react";
 import GlobalStyle from "../../../Styles/GlobalStyle";
+import URL from "../../ApiUrl/Url";
 
 
 export default function() {
@@ -11,11 +12,25 @@ export default function() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
       
+      data.exit = false
+      const config = {
+        headers: {
+          Authorization: `cc46f6e4-e32f-45c6-9f00-a476d6432eb7`
+        }
+      }
       console.log(data)
+      const submitData = axios.post(`${URL}novasaida`, data, config)
+      submitData.then((res) =>{
+              console.log(res.data)
+              
+              navigate("/home")
+              })
       
-      navigate('/home')
+      submitData.catch((err) => {
+          alert(err.response.data.message)
+      })
     };
-    console.log(watch("example")); // watch input value by passing the name of it
+    
   
     return (
       <Container>

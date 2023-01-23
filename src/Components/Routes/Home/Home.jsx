@@ -11,24 +11,28 @@ export default function (){
     const navigate = useNavigate()
 
     const [entries, setEntries] = useState()
+    let [valuesArray, setValuesArray] = useState(0)
     
     console.log(entries)
 
     useEffect( ()=>{
         const config = {
             headers: {
-                Authorization: `23e644c3-5400-4d30-b48c-7bf05d2a61a1`
+                Authorization: `cc46f6e4-e32f-45c6-9f00-a476d6432eb7`
             }
         }
         console.log(URL)
         const promise = axios.get(`${URL}home`, config)
-        promise.then((res) => {setEntries(res.data), console.log(res.data)})
+        promise.then((res) => {setEntries(res.data), console.log(res.data), setValuesArray(res.data.map((n) => {setValuesArray(n.value), console.log(n.value)}))})
         promise.catch(console.log)
         
     } ,[]
     )
     
-    console.log(entries)
+    
+    
+    console.log(valuesArray)    
+
 
     if(entries){
     return(
@@ -37,8 +41,9 @@ export default function (){
         <Container>
         <h2>Olá, fulaninho</h2>
         <RegisteredEntries>
-           
-            {entries.map((n)=> <Entrie><p style={{color:"#C6C6C6"}}>{n.date}</p><p>{n.description}</p><p style={{color:"#03AC00"}}>{n.value}</p></Entrie>)}
+           <EntrieContainer>
+            {entries.map((n)=> <Entrie><p style={{color:"#C6C6C6"}}>{n.date}</p><p>{n.description}</p><p style={{color:"#03AC00"}}>{n.value > 0 ? n.value.toFixed(2) : -(n.value.toFixed(2))}</p></Entrie>)}
+            </EntrieContainer>
             <Saldo>
                 <h4>
                     <div>saldo</div>
@@ -108,6 +113,7 @@ const RegisteredEntries = styled.div`
     padding-left: 11px;
     padding-right: 11px;
     box-sizing: border-box;
+    overflow: auto;
 `
 
 const EntrieOptions = styled.div`
@@ -130,6 +136,11 @@ display: flex;
 const Entrie = styled.span`
     display: flex;
     justify-content: space-between;
+    
+`
+
+const EntrieContainer = styled.div`
+    
 `
 
 const Saldo = styled.div`
