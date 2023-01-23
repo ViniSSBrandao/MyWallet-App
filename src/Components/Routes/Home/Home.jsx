@@ -59,10 +59,10 @@ export default function (){
         </RegisteredEntries>
         <EntrieOptions>
             <div>
-                <button onClick={() => navigate("/nova-entrada")}> <img src="./Plus.svg"/> <h2>Nova entrada</h2></button>
+                <button onClick={() => navigate("/nova-entrada")}> <img src="./Plus.svg"/> <Box><h2>Nova entrada</h2></Box></button>
             </div>
             <div>
-                <button onClick={() => navigate("/nova-saida")}><img src="./Minus.svg"/> <h2>Nova saida</h2></button>
+                <button onClick={() => navigate("/nova-saida")}><img src="./Minus.svg"/> <Box><h2>Nova saida</h2></Box></button>
             </div>
         </EntrieOptions>
         </Container>
@@ -133,12 +133,19 @@ const EntrieOptions = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 15px;
+    padding-bottom: 50px;
     button{
     width: 156px;
     height: 114px;
     border: none;
     background: #A328D6;
-    border-radius: 5px;}
+    border-radius: 5px;
+        box-sizing: border-box;
+}
+    img{
+        position: relative;
+        right: 30px;
+    }
 `
 
 const NoEntry = styled.div`
@@ -162,4 +169,8 @@ bottom: 15px;
 width: 100%;
 display: flex;
 justify-content: space-between;
+`
+
+const Box = styled.div`
+    width: 40px;
 `
